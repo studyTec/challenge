@@ -1,5 +1,3 @@
-package com.addictiveprogrammer;
-
 import java.util.Scanner;
 
 public class AirlineDriver {
