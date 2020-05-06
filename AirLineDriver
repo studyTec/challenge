@@ -1,0 +1,91 @@
+package com.addictiveprogrammer;
+
+import java.util.Scanner;
+
+public class AirlineDriver {
+
+    private static Scanner scan=new Scanner(System.in);
+
+  public static void main(String[] args) {
+    
+    final char[][] layout={{'A','B','C','D'},{'A','B','C','D'},{'A','B','C','D'},{'A','B','C','D'},{'A','B','C','D'}};
+    
+    displaySeats(layout);
+    //loop started while user not enter -1
+    while(true){
+    
+    System.out.println("Enter row and seat ");
+     String seat=scan.nextLine(); 
+     //covert enter row and seat in uppercase
+      seat= seat.toUpperCase();
+      
+      //if user enters the -1 loop is break
+     if(seat.contains("-1")){
+       break ;
+     }
+    
+    //set row take char at first position and  column take at second position like 1A or 1a 
+     char r=seat.charAt(0);
+     char c=seat.charAt(1);
+     
+     //call seatAvailable function check if seat available it return true else false
+     if(seatAvailable(r,c,layout)){
+     // if seats available displays booked seats
+       System.out.println("Seats is available and booked");
+       displaySeats(layout); 
+      }else{
+      // if seats are not avilable display the available seats 
+      System.out.println("seat is not a available or invalid entry");
+      System.out.println("Available seats are : ");
+      displaySeats(layout); 
+      }
+      
+    
+    }
+    
+  }
+  //method that displays the seats
+  public static void displaySeats(char[][] plane){
+    
+    for(int row=0;row<plane.length;row++){
+      System.out.print("   "+(row+1)+"  ");
+      //add for loop to display one row
+      for(int col=0;col<plane[row].length;col++){
+      
+      //display row
+      System.out.print(" "+plane[row][col]); 
+      
+      }
+      System.out.println(); 
+      
+    
+    }
+    
+  }
+  
+  //method check if the seats are available or not if available put the 'X' on the seat and book it
+  public static boolean seatAvailable(char row,char col,char[][] seats){
+      
+      //loop that checks the rows
+    for(int i=0;i<seats.length;i++){
+    //if input row-1 is equals to the i then it check for the availabe seats in the row 
+     if(Integer.parseInt(String.valueOf(row))-1==(i)){
+      
+       //check the column or seats is avialable or not
+        for(int j=0;j<seats[i].length;j++){
+          if(seats[i][j]==col){
+          //if the seat is available put 'X' and book it
+            seats[i][j]='X';
+            return true;
+          }
+        }
+      }
+    }
+    
+    return false;
+    
+  }
+  
+  
+
+}
